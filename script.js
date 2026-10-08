@@ -47,7 +47,7 @@ const pubs = $("#pubs");
 if (pubs) {
   const renderPubs = (f = "all") => {
     pubs.innerHTML = PUBS.filter(p => f === "all" || p.t === f).map((p, i) =>
-      `<li class="glass" style="animation-delay:${i * 60}ms"><span class="tag ${p.t}">${LABEL[p.t]}</span><h3>${esc(p.title)}</h3><span class="m">${esc(p.authors)}</span><span class="m">${esc(p.venue)}${p.link ? ` · <a href="${p.link}" target="_blank" rel="noopener" class="pub-link">Read →</a>` : ""}</span></li>`
+            `<li class="glass" style="animation-delay:${i * 60}ms"><span class="tag ${p.t}">${LABEL[p.t]}</span><h3>${esc(p.title)}</h3><span class="m">${esc(p.authors)}</span><span class="m">${esc(p.venue)}${p.link ? ` · <a href="${p.link}" target="_blank" rel="noopener" class="pub-link">Read</a>` : ""}</span></li>`
     ).join("");
   };
   renderPubs();
