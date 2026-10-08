@@ -4,7 +4,7 @@ const SOCIAL = { scholar: "", github: "", linkedin: "", kaggle: "" };
 const FORMS = {
   join: {
     action: "https://docs.google.com/forms/d/e/YOUR_JOIN_FORM_ID/formResponse",
-    entries: { name: "entry.0000000001", email: "entry.0000000002", affiliation: "entry.0000000003", interests: "entry.0000000004", message: "entry.0000000005" }
+    entries: { name: "entry.0000000001", email: "entry.0000000002", affiliation: "entry.0000000003", role: "entry.0000000004", interests: "entry.0000000005", message: "entry.0000000006" }
   },
   contact: {
     action: "https://docs.google.com/forms/d/e/YOUR_CONTACT_FORM_ID/formResponse",
