@@ -24,15 +24,6 @@ const PUBS = [
 ];
 const LABEL = { J: "Journal", C: "Conf.", P: "Preprint", U: "Review" };
 
-const PROJECTS = [
-  { stat: "7.85", unit: "bpm MAE", name: "MoWaveQFormer", blurb: "Smartphone PPG heart-rate estimation.", more: "A motion-conditioned, quality-gated Transformer evaluated on a subject-independent split of BUT PPG v2.0. About 816K parameters and sub-3-ms latency make it suitable for on-device use.", tags: ["Transformer", "Wavelets", "Heart rate"] },
-  { stat: "11.71", unit: "dB output SNR", name: "BAFF-ECG", blurb: "SNR-aware ECG denoising.", more: "A Bayesian filter-fusion framework: Dirichlet attention blends classical filters and a residual gate adapts to the estimated noise level. Cross-correlation with clean ECG reaches 0.917.", tags: ["ECG", "Filter fusion", "Gating"] },
-  { stat: "27.88", unit: "dB SNR", name: "HRV-preserving PPG denoiser", blurb: "Clean signals that keep HRV intact.", more: "An attention-enhanced 1D-CNN encoder–decoder trained with an HRV-preserving loss, reaching 0.998 correlation on synthetic data. Presented at IEEE ICEIC 2026.", tags: ["1D-CNN", "PPG", "HRV"] },
-  { stat: "90.91%", unit: "accuracy", name: "PPG diabetes screening", blurb: "Non-invasive screening from PPG.", more: "Adaptive filtering, signal-quality assessment and TreeSHAP feature selection give 0.915 ROC-AUC. A companion glucose-estimation study reaches R² = 0.410.", tags: ["TreeSHAP", "Glucose", "Screening"] },
-  { stat: "150", unit: "studies", name: "ECG denoising review", blurb: "A PRISMA-guided systematic review.", more: "Finds a reconstruction–decision gap: 74% test only on synthetic noise, 79% use one lead and 73% never test clinical impact. Proposes a five-part reporting standard. Manuscript in preparation.", tags: ["PRISMA", "Review", "Reporting"] },
-  { stat: "0.86", unit: "macro F1", name: "Arrhythmia ensembles", blurb: "MIT-BIH multi-class classification.", more: "AdamW-optimized deep ensembles with SMOTE balancing lift macro F1 from 0.74 to 0.86 over the baseline. Presented at IEEE QPAIN 2026.", tags: ["Ensembles", "SMOTE", "ECG"] }
-];
-
 /* ========= HELPERS ========= */
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -56,21 +47,11 @@ const pubs = $("#pubs");
 if (pubs) {
   const renderPubs = (f = "all") => {
     pubs.innerHTML = PUBS.filter(p => f === "all" || p.t === f).map((p, i) =>
-      `<li class="glass" style="animation-delay:${i * 60}ms"><span class="tag ${p.t}">${LABEL[p.t]}</span><h3>${esc(p.title)}</h3><span class="m">${esc(p.authors)}</span><span class="m">${esc(p.venue)}${p.link ? ` · <a href="${p.link}" target="_blank" rel="noopener" class="pub-link">Read →</a>` : ""}</span></li>`).join("");
+      `<li class="glass" style="animation-delay:${i * 60}ms"><span class="tag ${p.t}">${LABEL[p.t]}</span><h3>${esc(p.title)}</h3><span class="m">${esc(p.authors)}</span><span class="m">${esc(p.venue)}${p.link ? ` · <a href="${p.link}" target="_blank" rel="noopener" class="pub-link">Read →</a>` : ""}</span></li>`
+    ).join("");
   };
   renderPubs();
   $$(".chip").forEach(c => c.addEventListener("click", () => { $$(".chip").forEach(x => x.classList.remove("on")); c.classList.add("on"); renderPubs(c.dataset.f); }));
-}
-
-/* ========= PROJECTS (only on projects.html) ========= */
-const pg = $("#projects-grid");
-if (pg) {
-  pg.innerHTML = PROJECTS.map(p =>
-    `<button class="card glass proj" aria-expanded="false"><div class="top"><div class="stat">${p.stat}<small>${p.unit}</small></div><h3>${p.name}</h3><p>${p.blurb}</p></div><div class="more">${p.more}</div><span class="toggle">Details</span><div class="tags">${p.tags.map(t => `<span>${t}</span>`).join("")}</div></button>`).join("");
-  $$(".proj").forEach(b => b.addEventListener("click", () => {
-    const o = b.getAttribute("aria-expanded") === "true";
-    b.setAttribute("aria-expanded", !o); $(".toggle", b).textContent = o ? "Details" : "Hide";
-  }));
 }
 
 /* ========= SCROLL REVEAL ========= */
@@ -123,7 +104,6 @@ if (cv) {
   };
   requestAnimationFrame(frame);
 
-  /* live metric updates — guarded so a missing element never crashes the loop */
   /* live metric updates — realistic model of denoising behaviour */
   setInterval(() => {
     const n = noiseIn.value / 100, on = codecIn.checked;
