@@ -216,3 +216,20 @@ main.page > section:first-child{padding-top:150px}
 }
 .pub-link:hover{color:var(--teal)}
 
+.roles-head{
+  font-size:16px;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin:8px 0 16px;
+}
+.join-note{
+  color:var(--ink2);
+  font-size:16px;
+  line-height:1.65;
+  margin:28px 0 0;
+  max-width:56ch;
+  padding-left:16px;
+  border-left:3px solid var(--teal);
+}
