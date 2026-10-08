@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BioCodec Lab · Deep Learning for Physiological Signals</title>
-<meta name="description" content="BioCodec Lab builds deep learning methods that denoise, assess and decode PPG and ECG signals for wearable health monitoring.">
+<meta name="description" content="BioCodec Lab develops computational methods for understanding PPG and ECG signals in real-world wearable settings — signal denoising, motion-artifact mitigation, signal quality assessment, and physiological parameter estimation.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -50,15 +50,28 @@
         <label class="ctl">Motion noise <input id="noise" type="range" min="0" max="100" value="55" aria-label="Motion noise level"></label>
         <label class="ctl sw"><input id="codec" type="checkbox" checked> Codec on</label>
       </div>
+
+      <div class="pipeline" id="pipeline">
+        <div class="pipe-step" data-step="1"><span class="pipe-dot"></span>Noisy PPG</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-step" data-step="2"><span class="pipe-dot"></span>Motion Artifact Removal</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-step" data-step="3"><span class="pipe-dot"></span>Clean PPG</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-step" data-step="4"><span class="pipe-dot"></span>Quality Assessment</div>
+        <span class="pipe-arrow">→</span>
+        <div class="pipe-step" data-step="5"><span class="pipe-dot"></span>Physiological Metrics</div>
+      </div>
+
       <canvas id="wave" height="240" aria-label="Animated PPG waveform before and after denoising" role="img"></canvas>
-      <div class="scope-foot"><span>Estimated heart rate <b id="hr">72</b> bpm</span><span>Signal quality <b id="sq">—</b></span></div>
+
+      <div class="scope-foot">
+        <span>Heart rate <b id="hr">72</b> bpm</span>
+        <span>Signal quality <b id="sq">—</b></span>
+        <span>SNR <b id="snr">—</b></span>
+        <span>HRV (RMSSD) <b id="hrv">—</b></span>
+      </div>
     </div>
-    <ul class="stats">
-      <li class="glass"><b>7.85</b><span>bpm MAE on BUT PPG v2.0, subject-independent</span></li>
-      <li class="glass"><b>&lt;3 ms</b><span>inference latency with ~816K parameters</span></li>
-      <li class="glass"><b>150</b><span>ECG denoising studies reviewed, 2013–2026</span></li>
-      <li class="glass"><b>5</b><span>papers published or in preprint</span></li>
-    </ul>
   </div>
 </section>
 </main>
