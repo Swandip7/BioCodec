@@ -3,8 +3,15 @@ const SOCIAL = { scholar: "", github: "", linkedin: "", kaggle: "" };
 
 const FORMS = {
   join: {
-    action: "https://docs.google.com/forms/d/e/YOUR_JOIN_FORM_ID/formResponse",
-    entries: { name: "entry.0000000001", email: "entry.0000000002", affiliation: "entry.0000000003", role: "entry.0000000004", interests: "entry.0000000005", message: "entry.0000000006" }
+    action: "https://docs.google.com/forms/d/e/1FAIpQLSenhO3k970tWt5eHss4Q-NCgcbh70y2c-qZspPocf8Ru6Y1qw/formResponse",
+    entries: {
+      name: "entry.647239256",
+      email: "entry.1837406363",
+      affiliation: "entry.2025629795",
+      role: "entry.14897761",
+      interests: "entry.1780264076",
+      message: "entry.1704437572"
+    }
   },
   contact: {
     action: "https://docs.google.com/forms/d/e/YOUR_CONTACT_FORM_ID/formResponse",
