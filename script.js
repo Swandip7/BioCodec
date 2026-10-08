@@ -124,20 +124,29 @@ if (cv) {
   requestAnimationFrame(frame);
 
   /* live metric updates — guarded so a missing element never crashes the loop */
+  /* live metric updates — realistic model of denoising behaviour */
   setInterval(() => {
     const n = noiseIn.value / 100, on = codecIn.checked;
 
-    const err = on ? n * 1.5 : n * 22;
-    if (hrEl) hrEl.textContent = Math.round(BPM + (Math.random() - .5) * 2 * err);
+    // Heart rate error grows sharply with noise (motion corrupts peak detection)
+    const hrErr = on ? n * 2.2 : n * 32;
+    if (hrEl) hrEl.textContent = Math.round(BPM + (Math.random() - .5) * 2 * hrErr);
 
-    const q = n < .35 ? "High" : n < .7 ? "Medium" : "Low";
-    if (sqEl) sqEl.textContent = on && n > .85 ? "Low·gated" : q;
+    // Signal quality tiers
+    const q = n < .25 ? "High" : n < .55 ? "Medium" : n < .8 ? "Low" : "Poor";
+    if (sqEl) sqEl.textContent = (on && n > .85) ? "Low·gated" : q;
 
-    const cleanSnr = 32 - n * 22;
-    const denoisedSnr = cleanSnr + (on ? n * 14 : 0);
+    // SNR: raw input collapses to ~6 dB at max noise; codec recovers ~18 dB
+    const rawSnr = 32 - n * 26;
+    const denoisedSnr = rawSnr + (on ? n * 18 : 0);
     if (snrEl) snrEl.textContent = Math.max(2, denoisedSnr).toFixed(1) + " dB";
 
-    const rVal = on ? (0.998 - n * 0.02) : (0.98 - n * 0.35);
+    // Correlation with clean reference:
+    // codec ON degrades gracefully (0.999 → 0.94)
+    // codec OFF falls off fast (0.99 → 0.35)
+    const rOn  = 0.999 - n * 0.06;
+    const rOff = 0.99 - Math.pow(n, 0.7) * 0.64;
+    const rVal = on ? rOn : rOff;
     if (corrEl) corrEl.textContent = Math.max(0, rVal).toFixed(3);
   }, 600);
 }
