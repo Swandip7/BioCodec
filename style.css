@@ -209,9 +209,10 @@ main.page > section:first-child{padding-top:150px}
 .pub-link{
   display:inline-block;
   font-weight:700;
-  color:var(--teal);
-  text-decoration:none;
-  border-bottom:1px solid transparent;
-  transition:border-color .2s;
+  color:var(--blue);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  transition:color .2s;
 }
-.pub-link:hover{border-bottom-color:var(--teal)}
+.pub-link:hover{color:var(--teal)}
+
