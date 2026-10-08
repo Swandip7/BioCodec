@@ -14,9 +14,9 @@ const FORMS = {
 
 /* ========= DATA ========= */
 const PUBS = [
-  { t: "J", title: "Adaptive Digital Filtering and TreeSHAP Feature Selection for Non-Invasive Diabetes Classification from Photoplethysmography Signals", authors: "S. Singha, A. Chowdhury", venue: "Discover Artificial Intelligence, 2026", link: "" },
-  { t: "C", title: "1D-CNN-Based Denoising of PPG Signals for Preserving Heart Rate Variability Information", authors: "S. Singha, A. Chowdhury, R. C. C. Cheung, M. H. Chowdhury", venue: "IEEE ICEIC, 2026 · oral presentation", link: "" },
-  { t: "C", title: "MIT-BIH ECG Arrhythmia Multi-Class Classification Using AdamW-Optimized Deep Ensembles with SMOTE-Based Sampling", authors: "S. Singha, A. Saha, et al.", venue: "IEEE QPAIN, 2026 · oral presentation", link: "" },
+  { t: "J", title: "Adaptive Digital Filtering and TreeSHAP Feature Selection for Non-Invasive Diabetes Classification from Photoplethysmography Signals", authors: "S. Singha, A. Chowdhury", venue: "Discover Artificial Intelligence, 2026", link: "https://link.springer.com/article/10.1007/s44163-026-01871-3" },
+  { t: "C", title: "1D-CNN-Based Denoising of PPG Signals for Preserving Heart Rate Variability Information", authors: "S. Singha, A. Chowdhury, R. C. C. Cheung, M. H. Chowdhury", venue: "IEEE ICEIC, 2026 · oral presentation", link: "https://ieeexplore.ieee.org/document/11386050/" },
+  { t: "C", title: "MIT-BIH ECG Arrhythmia Multi-Class Classification Using AdamW-Optimized Deep Ensembles with SMOTE-Based Sampling", authors: "S. Singha, A. Saha, et al.", venue: "IEEE QPAIN, 2026 · oral presentation", link: "https://ieeexplore.ieee.org/document/11545563" },
   { t: "P", title: "MoWaveQFormer: A Motion-Conditioned Quality-Gated Transformer for Smartphone-Based PPG Heart Rate Estimation", authors: "S. Singha, R. B. Reza, S. R. Sabuj", venue: "arXiv:2609.16248, 2026", link: "https://arxiv.org/abs/2609.16248" },
   { t: "U", title: "BAFF-ECG: SNR-Conditioned ECG Denoising via Dirichlet Filter Fusion and Residual Gating", authors: "S. Singha, A. Chowdhury", venue: "Under review at Measurement", link: "" },
   { t: "U", title: "Non-Invasive Blood Glucose Estimation from Multi-Wavelength Photoplethysmography Using Adaptive Signal Quality Assessment and Statistical Feature Selection", authors: "S. Singha, A. Chowdhury", venue: "Under review at Health Information Science and Systems", link: "" },
