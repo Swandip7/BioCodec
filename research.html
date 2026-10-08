@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Research · BioCodec Lab</title>
-<meta name="description" content="Research directions at BioCodec Lab: motion-artifact removal, signal quality, wearable monitoring, and transformers.">
+<meta name="description" content="Research directions at BioCodec Lab: motion-artifact mitigation, signal quality assessment, wearable cardiovascular monitoring, and transformers for physiological modeling.">
 <link rel="icon" type="image/png" href="assets/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -38,18 +38,34 @@
 <section id="research" style="padding-top:150px">
   <div class="wrap">
     <h2>Research</h2>
-    <p class="sub">Four connected questions, one goal: biosignals clean enough to trust in daily life.</p>
+    <p class="sub">Our research addresses four interconnected areas in robust physiological signal analysis, with the goal of improving reliable inference from real-world biosignals.</p>
     <div class="grid four">
-      <article class="card glass"><svg viewBox="0 0 48 48"><path d="M2 26h8l4-14 6 28 5-20 4 6h17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Motion-artifact removal</h3><p>Denoising PPG and ECG while preserving what clinicians use: beat timing, HRV and waveform morphology.</p></article>
-      <article class="card glass"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Signal quality assessment</h3><p>Gates that decide when a segment is trustworthy, so models fall back gracefully instead of guessing.</p></article>
-      <article class="card glass"><svg viewBox="0 0 48 48"><path d="M24 43C10 32 6 24 6 17a9 9 0 0 1 18-2 9 9 0 0 1 18 2c0 7-4 15-18 26z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg><h3>Wearable cardiovascular monitoring</h3><p>Smartphone and wrist heart-rate estimation, arrhythmia classification and non-invasive glucose screening.</p></article>
-      <article class="card glass"><svg viewBox="0 0 48 48"><rect x="6" y="6" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><rect x="26" y="26" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 14h10v12M26 34H16V22" fill="none" stroke="currentColor" stroke-width="3"/></svg><h3>Transformers &amp; digital twins</h3><p>Motion-conditioned attention and physiological simulators for training and stress-testing models.</p></article>
+      <article class="card glass">
+        <svg viewBox="0 0 48 48"><path d="M2 26h8l4-14 6 28 5-20 4 6h17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Motion-artifact mitigation</h3>
+        <p>Developing methods for denoising PPG and ECG signals while preserving physiologically meaningful information, including beat timing, HRV, and waveform morphology.</p>
+      </article>
+      <article class="card glass">
+        <svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Signal quality assessment</h3>
+        <p>Developing signal-quality assessment methods to identify unreliable segments and improve the robustness of downstream physiological inference.</p>
+      </article>
+      <article class="card glass">
+        <svg viewBox="0 0 48 48"><path d="M24 43C10 32 6 24 6 17a9 9 0 0 1 18-2 9 9 0 0 1 18 2c0 7-4 15-18 26z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg>
+        <h3>Wearable cardiovascular monitoring</h3>
+        <p>Investigating physiological parameter estimation and cardiovascular monitoring from wearable and smartphone-based sensing, including heart-rate estimation, arrhythmia classification, and non-invasive glucose assessment.</p>
+      </article>
+      <article class="card glass">
+        <svg viewBox="0 0 48 48"><rect x="6" y="6" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><rect x="26" y="26" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 14h10v12M26 34H16V22" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+        <h3>Transformers &amp; physiological modeling</h3>
+        <p>Applying attention-based architectures and physiological modeling to capture complex temporal dynamics, improve robustness to motion and measurement variability, and support controlled evaluation of learning-based methods.</p>
+      </article>
     </div>
   </div>
 </section>
 </main>
 
-<footer><div class="wrap"><span>© <span id="yr"></span> BioCodec Lab · CUET, Bangladesh</span><a href="index.html">Back to home</a></div></footer>
+<footer><div class="wrap"><span>© <span id="yr"></span> BioCodec Lab · Bangladesh</span><a href="index.html">Back to home</a></div></footer>
 <script src="script.js"></script>
 </body>
 </html>
