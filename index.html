@@ -3,14 +3,55 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <title>BioCodec Lab · Deep Learning for Physiological Signals</title>
 
+<meta name="description" content="BioCodec Lab develops computational methods for understanding physiological signals from wearable sensors, with a focus on PPG, ECG, signal processing, and machine learning.">
+
+<link rel="icon" type="image/png" href="assets/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "BioCodec Lab",
+  "url": "https://swandip7.github.io/BioCodec/",
+  "logo": "https://swandip7.github.io/BioCodec/assets/favicon.png"
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="bg" aria-hidden="true">
+  <i></i>
+  <i></i>
+  <i></i>
+</div>
+
 <header class="nav glass" id="nav">
+
   <a href="index.html" class="brand" aria-label="BioCodec Lab home">
     <img src="assets/logo.png" alt="BioCodec Lab logo">
   </a>
-  <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
-  <nav id="links">
+
+  <button
+    class="burger"
+    aria-label="Menu"
+    aria-expanded="false"
+    aria-controls="links">
+    <span></span>
+    <span></span>
+  </button>
+
+  <nav id="links" aria-label="Main navigation">
     <a href="index.html" class="active">Home</a>
     <a href="about.html">About</a>
     <a href="research.html">Research</a>
@@ -20,39 +61,146 @@
     <a href="join.html">Join Us</a>
     <a href="contact.html" class="cta">Contact</a>
   </nav>
+
 </header>
 
 <main>
+
 <section class="hero" id="home">
+
   <div class="wrap">
-    <p class="kicker">Intelligent Computing for Physiological Signals</p>
-    <h1><span>Translating Complex</span> <span>Physiological Signals</span> <span class="grad">from Wearable Sensors</span></h1>
-    <p class="lead">BioCodec Lab develops computational methods for understanding PPG and ECG signals in real-world wearable settings. Our research focuses on signal denoising, motion-artifact mitigation, signal quality assessment, and physiological parameter estimation using signal processing and machine learning.</p>
-    <div class="actions"><a class="btn primary" href="research.html">Explore research</a><a class="btn ghost" href="join.html">Join the lab</a></div>
+
+    <p class="kicker">
+      Intelligent Computing for Physiological Signals
+    </p>
+
+    <h1>
+      <span>Translating Complex</span>
+      <span>Physiological Signals</span>
+      <span class="grad">from Wearable Sensors</span>
+    </h1>
+
+    <p class="lead">
+      BioCodec Lab develops computational methods for understanding PPG and ECG signals in real-world wearable settings. Our research focuses on signal denoising, motion-artifact mitigation, signal quality assessment, and physiological parameter estimation using signal processing and machine learning.
+    </p>
+
+    <div class="actions">
+      <a class="btn primary" href="research.html">
+        Explore research
+      </a>
+
+      <a class="btn ghost" href="join.html">
+        Join the lab
+      </a>
+    </div>
+
   </div>
 
+
   <div class="wrap">
+
     <div class="scope glass" id="scope">
+
       <div class="scope-top">
-        <div class="legend"><span class="l noisy">Raw wrist PPG</span><span class="l clean">BioCodec output</span></div>
-        <label class="ctl">Motion noise <input id="noise" type="range" min="0" max="100" value="55" aria-label="Motion noise level"></label>
-        <label class="ctl sw"><input id="codec" type="checkbox" checked> Codec on</label>
+
+        <div class="legend">
+          <span class="l noisy">
+            Raw wrist PPG
+          </span>
+
+          <span class="l clean">
+            BioCodec output
+          </span>
+        </div>
+
+
+        <label class="ctl">
+          Motion noise
+
+          <input
+            id="noise"
+            type="range"
+            min="0"
+            max="100"
+            value="55"
+            aria-label="Motion noise level">
+        </label>
+
+
+        <label class="ctl sw">
+
+          <input
+            id="codec"
+            type="checkbox"
+            checked>
+
+          Codec on
+
+        </label>
+
       </div>
 
-      <canvas id="wave" height="240" aria-label="Animated PPG waveform before and after denoising" role="img"></canvas>
+
+      <canvas
+        id="wave"
+        height="240"
+        aria-label="Animated PPG waveform before and after denoising"
+        role="img">
+      </canvas>
+
 
       <div class="scope-foot">
-        <span>Heart rate <b id="hr">72</b> bpm</span>
-        <span>Signal quality <b id="sq">—</b></span>
-        <span>SNR <b id="snr">—</b></span>
-        <span>Correlation <b id="corr">—</b></span>
+
+        <span>
+          Heart rate
+          <b id="hr">72</b>
+          bpm
+        </span>
+
+        <span>
+          Signal quality
+          <b id="sq">—</b>
+        </span>
+
+        <span>
+          SNR
+          <b id="snr">—</b>
+        </span>
+
+        <span>
+          Correlation
+          <b id="corr">—</b>
+        </span>
+
       </div>
+
     </div>
+
   </div>
+
 </section>
+
 </main>
 
-<footer><div class="wrap"><span>© <span id="yr"></span> BioCodec Lab · Bangladesh</span><a href="index.html">Back to home</a></div></footer>
+
+<footer>
+
+  <div class="wrap">
+
+    <span>
+      © <span id="yr"></span> BioCodec Lab · Bangladesh
+    </span>
+
+    <a href="index.html">
+      Back to home
+    </a>
+
+  </div>
+
+</footer>
+
+
 <script src="script.js"></script>
+
 </body>
 </html>
