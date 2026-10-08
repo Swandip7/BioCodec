@@ -287,7 +287,7 @@ main.page > section:first-child{padding-top:150px}
    =========================== */
 
 .people-group{
-  margin-bottom:56px;
+  margin-bottom:64px;
 }
 .people-group:last-child{
   margin-bottom:0;
@@ -299,7 +299,7 @@ main.page > section:first-child{padding-top:150px}
   letter-spacing:.12em;
   text-transform:uppercase;
   color:var(--blue);
-  margin:0 0 20px;
+  margin:0 0 28px;
   padding-bottom:12px;
   border-bottom:1px solid rgba(15,47,79,.1);
 }
@@ -323,10 +323,10 @@ main.page > section:first-child{padding-top:150px}
   box-shadow:0 18px 50px rgba(31,90,140,.22);
 }
 
-/* --- photo --- */
+/* --- photo (smaller now) --- */
 .person-photo{
   width:100%;
-  aspect-ratio:1 / 1;
+  aspect-ratio:4 / 3;
   display:block;
   object-fit:cover;
   object-position:center top;
@@ -335,31 +335,31 @@ main.page > section:first-child{padding-top:150px}
 
 /* --- info block --- */
 .person-info{
-  padding:22px 24px 26px;
+  padding:24px 24px 28px;
   display:flex;
   flex-direction:column;
   gap:8px;
 }
 
 .person-card h3{
-  font-size:21px;
+  font-size:19px;
   font-weight:800;
   color:var(--blue);
   margin:0;
   letter-spacing:-.01em;
-  line-height:1.2;
+  line-height:1.25;
 }
 
 .person-bio{
   color:var(--ink2);
-  font-size:15px;
+  font-size:14.5px;
   line-height:1.6;
-  margin:4px 0 0;
+  margin:6px 0 0;
 }
 
 .person-meta{
   color:var(--ink2) !important;
-  font-size:14.5px;
+  font-size:14px;
   line-height:1.55;
   margin:0 !important;
 }
@@ -367,12 +367,12 @@ main.page > section:first-child{padding-top:150px}
 .person-project{
   display:inline-block;
   align-self:flex-start;
-  font:600 13px var(--body);
+  font:600 12.5px var(--body);
   color:var(--blue);
   background:rgba(42,111,176,.1);
   padding:4px 12px;
   border-radius:999px;
-  margin-top:8px;
+  margin-top:10px;
   letter-spacing:.01em;
 }
 
@@ -386,7 +386,7 @@ main.page > section:first-child{padding-top:150px}
 .person-links a{
   color:var(--blue);
   font-weight:600;
-  font-size:14.5px;
+  font-size:14px;
   text-decoration:none;
   transition:color .2s;
 }
@@ -396,23 +396,30 @@ main.page > section:first-child{padding-top:150px}
   text-underline-offset:3px;
 }
 
-/* --- featured card (Swandip) --- */
+/* --- featured card (Swandip) — compact horizontal --- */
 .person-card.featured{
   flex-direction:row;
+  max-width:760px;
 }
 .person-card.featured .person-photo{
-  width:38%;
+  width:34%;
   aspect-ratio:auto;
-  min-height:320px;
+  min-height:220px;
+  max-height:260px;
   flex-shrink:0;
 }
 .person-card.featured .person-info{
   flex:1;
   justify-content:center;
-  padding:34px 36px;
+  padding:28px 30px;
+  gap:10px;
 }
 .person-card.featured h3{
-  font-size:26px;
+  font-size:22px;
+}
+.person-card.featured .person-bio{
+  font-size:15px;
+  margin-top:4px;
 }
 
 /* --- responsive --- */
@@ -421,35 +428,35 @@ main.page > section:first-child{padding-top:150px}
     grid-template-columns:repeat(2, 1fr);
   }
   .person-card.featured{
+    max-width:100%;
     flex-direction:column;
   }
   .person-card.featured .person-photo{
     width:100%;
-    aspect-ratio:1 / 1;
+    aspect-ratio:4 / 3;
     min-height:0;
+    max-height:none;
   }
   .person-card.featured .person-info{
-    padding:22px 24px 26px;
+    padding:24px 24px 28px;
   }
 }
 
 @media(max-width:600px){
+  .people-group{
+    margin-bottom:44px;
+  }
+  .people-heading{
+    margin-bottom:20px;
+    font-size:12.5px;
+  }
   .people-row{
     grid-template-columns:1fr;
   }
-  .person-photo{
-    aspect-ratio:4 / 3;
-  }
-  .person-card.featured .person-photo{
-    aspect-ratio:4 / 3;
-  }
   .person-card h3{
-    font-size:19px;
+    font-size:18px;
   }
   .person-card.featured h3{
-    font-size:22px;
-  }
-  .person-bio{
-    font-size:14.5px;
+    font-size:20px;
   }
 }
