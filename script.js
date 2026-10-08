@@ -1,8 +1,6 @@
-/* ========= CONFIG: edit these ========= */
-const SOCIAL = { scholar: "", github: "", linkedin: "", kaggle: "" }; // empty links are hidden
+/* ========= CONFIG ========= */
+const SOCIAL = { scholar: "", github: "", linkedin: "", kaggle: "" };
 
-// Google Forms: create a form, click ⋮ > "Get pre-filled link" to find each entry.XXXX id.
-// Replace FORM_ID and the entry ids. Field names on the left match the <input name="…"> in index.html.
 const FORMS = {
   join: {
     action: "https://docs.google.com/forms/d/e/YOUR_JOIN_FORM_ID/formResponse",
@@ -41,93 +39,98 @@ const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-$("#yr").textContent = new Date().getFullYear();
+const yrEl = $("#yr"); if (yrEl) yrEl.textContent = new Date().getFullYear();
 
-/* nav */
+/* ========= NAV BURGER ========= */
 const burger = $(".burger"), links = $("#links");
-burger.addEventListener("click", () => { const o = links.classList.toggle("open"); burger.setAttribute("aria-expanded", o); });
-links.addEventListener("click", e => { if (e.target.closest("a")) { links.classList.remove("open"); burger.setAttribute("aria-expanded", false); } });
-const secs = $$("main section");
-const spy = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting) $$("#links a").forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id && !a.classList.contains("cta")));
-}), { rootMargin: "-45% 0px -50% 0px" });
-secs.forEach(s => spy.observe(s));
+if (burger && links) {
+  burger.addEventListener("click", () => { const o = links.classList.toggle("open"); burger.setAttribute("aria-expanded", o); });
+  links.addEventListener("click", e => { if (e.target.closest("a")) { links.classList.remove("open"); burger.setAttribute("aria-expanded", false); } });
+}
 
-/* social links */
+/* ========= SOCIAL LINKS ========= */
 $$("[data-link]").forEach(a => { const u = SOCIAL[a.dataset.link]; if (u) { a.href = u; a.target = "_blank"; a.rel = "noopener"; } else a.remove(); });
 
-/* publications */
+/* ========= PUBLICATIONS (only on publications.html) ========= */
 const pubs = $("#pubs");
-function renderPubs(f = "all") {
-  pubs.innerHTML = PUBS.filter(p => f === "all" || p.t === f).map((p, i) =>
-    `<li class="glass" style="animation-delay:${i * 60}ms"><span class="tag ${p.t}">${LABEL[p.t]}</span><h3>${esc(p.title)}</h3><span class="m">${esc(p.authors)}</span><span class="m">${esc(p.venue)}${p.link ? ` · <a href="${p.link}" target="_blank" rel="noopener">Read</a>` : ""}</span></li>`).join("");
+if (pubs) {
+  const renderPubs = (f = "all") => {
+    pubs.innerHTML = PUBS.filter(p => f === "all" || p.t === f).map((p, i) =>
+      `<li class="glass" style="animation-delay:${i * 60}ms"><span class="tag ${p.t}">${LABEL[p.t]}</span><h3>${esc(p.title)}</h3><span class="m">${esc(p.authors)}</span><span class="m">${esc(p.venue)}${p.link ? ` · <a href="${p.link}" target="_blank" rel="noopener">Read</a>` : ""}</span></li>`).join("");
+  };
+  renderPubs();
+  $$(".chip").forEach(c => c.addEventListener("click", () => { $$(".chip").forEach(x => x.classList.remove("on")); c.classList.add("on"); renderPubs(c.dataset.f); }));
 }
-renderPubs();
-$$(".chip").forEach(c => c.addEventListener("click", () => { $$(".chip").forEach(x => x.classList.remove("on")); c.classList.add("on"); renderPubs(c.dataset.f); }));
 
-/* projects */
-$("#projects-grid").innerHTML = PROJECTS.map(p =>
-  `<button class="card glass proj" aria-expanded="false"><div class="top"><div class="stat">${p.stat}<small>${p.unit}</small></div><h3>${p.name}</h3><p>${p.blurb}</p></div><div class="more">${p.more}</div><span class="toggle">Details</span><div class="tags">${p.tags.map(t => `<span>${t}</span>`).join("")}</div></button>`).join("");
-$$(".proj").forEach(b => b.addEventListener("click", () => {
-  const o = b.getAttribute("aria-expanded") === "true";
-  b.setAttribute("aria-expanded", !o); $(".toggle", b).textContent = o ? "Details" : "Hide";
-}));
+/* ========= PROJECTS (only on projects.html) ========= */
+const pg = $("#projects-grid");
+if (pg) {
+  pg.innerHTML = PROJECTS.map(p =>
+    `<button class="card glass proj" aria-expanded="false"><div class="top"><div class="stat">${p.stat}<small>${p.unit}</small></div><h3>${p.name}</h3><p>${p.blurb}</p></div><div class="more">${p.more}</div><span class="toggle">Details</span><div class="tags">${p.tags.map(t => `<span>${t}</span>`).join("")}</div></button>`).join("");
+  $$(".proj").forEach(b => b.addEventListener("click", () => {
+    const o = b.getAttribute("aria-expanded") === "true";
+    b.setAttribute("aria-expanded", !o); $(".toggle", b).textContent = o ? "Details" : "Hide";
+  }));
+}
 
-/* gentle reveal */
+/* ========= SCROLL REVEAL ========= */
 const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); } }), { threshold: .12 });
 $$("section:not(.hero) h2, section:not(.hero) .sub, .grid, .people, .pubs, .roles, .form, .about > *, .stats").forEach(el => { el.classList.add("rv"); rv.observe(el); });
 
-/* ========= SIGNAL SCOPE ========= */
-const cv = $("#wave"), ctx = cv.getContext("2d");
-const noiseIn = $("#noise"), codecIn = $("#codec"), hrEl = $("#hr"), sqEl = $("#sq");
-let W, H, DPR;
-function size() { DPR = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); }
-size(); addEventListener("resize", size);
+/* ========= SIGNAL SCOPE (only on home) ========= */
+const cv = $("#wave");
+if (cv) {
+  const ctx = cv.getContext("2d");
+  const noiseIn = $("#noise"), codecIn = $("#codec"), hrEl = $("#hr"), sqEl = $("#sq");
+  let W, H, DPR;
+  const size = () => { DPR = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); };
+  size(); addEventListener("resize", size);
 
-const BPM = 72, PERIOD = 60 / BPM, SPEED = 120; // px per second
-const g = (x, m, s) => Math.exp(-((x - m) ** 2) / (2 * s * s));
-function clean(t) { const p = ((t % PERIOD) + PERIOD) % PERIOD / PERIOD; return g(p, .2, .07) + .38 * g(p, .5, .09); }
-function motion(t) { return Math.sin(t * 2.3) * .55 + Math.sin(t * 5.1 + 1) * .35 + Math.sin(t * .7) * .4 + (Math.sin(t * 1.3) > .6 ? Math.sin(t * 17) * .5 : 0); }
-function hash(x) { const s = Math.sin(x * 12.9898) * 43758.5453; return s - Math.floor(s); }
-function jitter(t) { return hash(Math.floor(t * 90)) - .5; }
+  const BPM = 72, PERIOD = 60 / BPM, SPEED = 120;
+  const g = (x, m, s) => Math.exp(-((x - m) ** 2) / (2 * s * s));
+  const clean = t => { const p = ((t % PERIOD) + PERIOD) % PERIOD / PERIOD; return g(p, .2, .07) + .38 * g(p, .5, .09); };
+  const motion = t => Math.sin(t * 2.3) * .55 + Math.sin(t * 5.1 + 1) * .35 + Math.sin(t * .7) * .4 + (Math.sin(t * 1.3) > .6 ? Math.sin(t * 17) * .5 : 0);
+  const hash = x => { const s = Math.sin(x * 12.9898) * 43758.5453; return s - Math.floor(s); };
+  const jitter = t => hash(Math.floor(t * 90)) - .5;
+  const y = v => H * .72 - v * H * .5;
+  const trace = (fn, color, width, alpha) => {
+    ctx.beginPath();
+    for (let x = 0; x <= W; x += 2) { const t = T + x / SPEED; const v = fn(t); x ? ctx.lineTo(x, y(v)) : ctx.moveTo(x, y(v)); }
+    ctx.strokeStyle = color; ctx.lineWidth = width; ctx.globalAlpha = alpha; ctx.lineJoin = "round"; ctx.stroke(); ctx.globalAlpha = 1;
+  };
+  let T = 0, last = performance.now(), visible = true;
+  new IntersectionObserver(e => visible = e[0].isIntersecting).observe(cv);
 
-function y(v) { return H * .72 - v * H * .5; }
-function trace(fn, color, width, alpha) {
-  ctx.beginPath();
-  for (let x = 0; x <= W; x += 2) { const t = T + x / SPEED; const v = fn(t); x ? ctx.lineTo(x, y(v)) : ctx.moveTo(x, y(v)); }
-  ctx.strokeStyle = color; ctx.lineWidth = width; ctx.globalAlpha = alpha; ctx.lineJoin = "round"; ctx.stroke(); ctx.globalAlpha = 1;
-}
-let T = 0, last = performance.now(), visible = true;
-new IntersectionObserver(e => visible = e[0].isIntersecting).observe(cv);
-
-function frame(now) {
+  const frame = now => {
+    requestAnimationFrame(frame);
+    if (!visible) { last = now; return; }
+    T += reduce ? 0 : (now - last) / 1000; last = now;
+    const n = noiseIn.value / 100, on = codecIn.checked;
+    ctx.clearRect(0, 0, W, H);
+    ctx.strokeStyle = "rgba(42,111,176,.08)"; ctx.lineWidth = 1;
+    for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
+    for (let k = 1; k < 6; k++) { ctx.beginPath(); ctx.moveTo(0, k * H / 6); ctx.lineTo(W, k * H / 6); ctx.stroke(); }
+    const noisy = t => clean(t) + n * (1.1 * motion(t) + .5 * jitter(t));
+    const denoised = t => clean(t) + (n * .06) * motion(t) * (n > .85 ? 2.5 : 1);
+    trace(noisy, "#f08a5d", 2, on ? .5 : 1);
+    if (on) { ctx.shadowColor = "rgba(23,184,162,.6)"; ctx.shadowBlur = 12; trace(denoised, "#17b8a2", 3.5, 1); ctx.shadowBlur = 0; }
+    const sx = (T * SPEED) % W;
+    const gr = ctx.createLinearGradient(sx - 60, 0, sx, 0);
+    gr.addColorStop(0, "rgba(90,209,238,0)"); gr.addColorStop(1, "rgba(90,209,238,.12)");
+    ctx.fillStyle = gr; ctx.fillRect(sx - 60, 0, 60, H);
+  };
   requestAnimationFrame(frame);
-  if (!visible) { last = now; return; }
-  T += reduce ? 0 : (now - last) / 1000; last = now;
-  const n = noiseIn.value / 100, on = codecIn.checked;
-  ctx.clearRect(0, 0, W, H);
-  ctx.strokeStyle = "rgba(42,111,176,.08)"; ctx.lineWidth = 1;
-  for (let x = 0; x < W; x += 40) { ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke(); }
-  for (let k = 1; k < 6; k++) { ctx.beginPath(); ctx.moveTo(0, k * H / 6); ctx.lineTo(W, k * H / 6); ctx.stroke(); }
-  const noisy = t => clean(t) + n * (1.1 * motion(t) + .5 * jitter(t));
-  const denoised = t => clean(t) + (n * .06) * motion(t) * (n > .85 ? 2.5 : 1);
-  trace(noisy, "#f08a5d", 2, on ? .5 : 1);
-  if (on) { ctx.shadowColor = "rgba(23,184,162,.6)"; ctx.shadowBlur = 12; trace(denoised, "#17b8a2", 3.5, 1); ctx.shadowBlur = 0; }
-  // scan line
-  const sx = (T * SPEED) % W; const gr = ctx.createLinearGradient(sx - 60, 0, sx, 0); gr.addColorStop(0, "rgba(90,209,238,0)"); gr.addColorStop(1, "rgba(90,209,238,.12)");
-  ctx.fillStyle = gr; ctx.fillRect(sx - 60, 0, 60, H);
+
+  setInterval(() => {
+    const n = noiseIn.value / 100, on = codecIn.checked;
+    const err = on ? n * 1.5 : n * 22;
+    hrEl.textContent = Math.round(BPM + (Math.random() - .5) * 2 * err);
+    const q = n < .35 ? "High" : n < .7 ? "Medium" : "Low";
+    sqEl.textContent = on && n > .85 ? "Low · segment gated" : q;
+  }, 600);
 }
-requestAnimationFrame(frame);
 
-setInterval(() => {
-  const n = noiseIn.value / 100, on = codecIn.checked;
-  const err = on ? n * 1.5 : n * 22;
-  hrEl.textContent = Math.round(BPM + (Math.random() - .5) * 2 * err);
-  const q = n < .35 ? "High" : n < .7 ? "Medium" : "Low";
-  sqEl.textContent = on && n > .85 ? "Low · segment gated" : q;
-}, 600);
-
-/* ========= FORMS (Google Forms backend) ========= */
+/* ========= FORMS (join + contact pages) ========= */
 $$(".form").forEach(form => form.addEventListener("submit", async e => {
   e.preventDefault();
   const st = $(".status", form), cfg = FORMS[form.dataset.kind], btn = $("button", form);
@@ -141,7 +144,8 @@ $$(".form").forEach(form => form.addEventListener("submit", async e => {
   btn.disabled = true; st.textContent = "Sending…";
   try {
     await fetch(cfg.action, { method: "POST", mode: "no-cors", body });
-    st.textContent = form.dataset.kind === "join" ? "Application sent. We will reply by email." : "Message sent. Thank you."; st.classList.add("ok"); form.reset();
+    st.textContent = form.dataset.kind === "join" ? "Application sent. We will reply by email." : "Message sent. Thank you.";
+    st.classList.add("ok"); form.reset();
   } catch { st.textContent = "Could not send. Check your connection or email us directly."; st.classList.add("err"); }
   btn.disabled = false;
 }));
