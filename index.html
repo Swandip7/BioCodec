@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BioCodec Lab · Deep Learning for Physiological Signals</title>
+<meta name="description" content="BioCodec Lab builds deep learning methods that denoise, assess and decode PPG and ECG signals for wearable health monitoring.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
+
+<header class="nav glass" id="nav">
+  <a href="#home" class="brand" aria-label="BioCodec Lab home">
+    <svg viewBox="0 0 40 40" width="34" height="34" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1fd3b5"/><stop offset="1" stop-color="#2a6fb0"/></linearGradient></defs><path d="M6 4h16a10 10 0 0 1 4 19 10 10 0 0 1-4 13H6z" fill="url(#g)"/><path d="M9 21h5l2-6 3 12 2-6h5" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>BioCodec<b>Lab</b></span>
+  </a>
+  <button class="burger" aria-label="Menu" aria-expanded="false"><span></span><span></span></button>
+  <nav id="links">
+    <a href="#home">Home</a><a href="#research">Research</a><a href="#people">People</a><a href="#publications">Publications</a><a href="#projects">Projects</a><a href="#join">Join Us</a><a href="#about">About</a><a href="#contact" class="cta">Contact</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="wrap">
+    <p class="kicker">Deep learning for physiological signals</p>
+    <h1><span>Wearables record</span> <span>noisy bodies.</span> <span class="grad">We decode them.</span></h1>
+    <p class="lead">BioCodec Lab develops transformer and CNN methods that remove motion artifacts, judge signal quality and extract heart rate, HRV and glucose cues from PPG and ECG.</p>
+    <div class="actions"><a class="btn primary" href="#research">Explore research</a><a class="btn ghost" href="#join">Join the lab</a></div>
+  </div>
+
+  <div class="wrap">
+    <div class="scope glass" id="scope">
+      <div class="scope-top">
+        <div class="legend"><span class="l noisy">Raw wrist PPG</span><span class="l clean">BioCodec output</span></div>
+        <label class="ctl">Motion noise <input id="noise" type="range" min="0" max="100" value="55" aria-label="Motion noise level"></label>
+        <label class="ctl sw"><input id="codec" type="checkbox" checked> Codec on</label>
+      </div>
+      <canvas id="wave" height="240" aria-label="Animated PPG waveform before and after denoising" role="img"></canvas>
+      <div class="scope-foot"><span>Estimated heart rate <b id="hr">72</b> bpm</span><span>Signal quality <b id="sq">—</b></span></div>
+    </div>
+    <ul class="stats">
+      <li class="glass"><b>7.85</b><span>bpm MAE on BUT PPG v2.0, subject-independent</span></li>
+      <li class="glass"><b>&lt;3 ms</b><span>inference latency with ~816K parameters</span></li>
+      <li class="glass"><b>150</b><span>ECG denoising studies reviewed, 2013–2026</span></li>
+      <li class="glass"><b>5</b><span>papers published or in preprint</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <h2>Research</h2>
+    <p class="sub">Four connected questions, one goal: biosignals clean enough to trust in daily life.</p>
+    <div class="grid four">
+      <article class="card glass"><svg viewBox="0 0 48 48"><path d="M2 26h8l4-14 6 28 5-20 4 6h17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Motion-artifact removal</h3><p>Denoising PPG and ECG while preserving what clinicians use: beat timing, HRV and waveform morphology.</p></article>
+      <article class="card glass"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="3"/><path d="M14 25l7 7 13-15" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Signal quality assessment</h3><p>Gates that decide when a segment is trustworthy, so models fall back gracefully instead of guessing.</p></article>
+      <article class="card glass"><svg viewBox="0 0 48 48"><path d="M24 43C10 32 6 24 6 17a9 9 0 0 1 18-2 9 9 0 0 1 18 2c0 7-4 15-18 26z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/></svg><h3>Wearable cardiovascular monitoring</h3><p>Smartphone and wrist heart-rate estimation, arrhythmia classification and non-invasive glucose screening.</p></article>
+      <article class="card glass"><svg viewBox="0 0 48 48"><rect x="6" y="6" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><rect x="26" y="26" width="16" height="16" rx="4" fill="none" stroke="currentColor" stroke-width="3"/><path d="M22 14h10v12M26 34H16V22" fill="none" stroke="currentColor" stroke-width="3"/></svg><h3>Transformers &amp; digital twins</h3><p>Motion-conditioned attention and physiological simulators for training and stress-testing models.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="people">
+  <div class="wrap">
+    <h2>People</h2>
+    <p class="sub">A small, hands-on group. Collaborators and advisors shape the work.</p>
+    <div class="people">
+      <article class="card glass lead-card">
+        <div class="avatar">SS</div>
+        <div><h3>Swandip Singha</h3><p class="role">Founder &amp; lead researcher</p>
+        <p>Undergraduate in Electrical and Electronic Engineering at CUET (CGPA 3.83/4.00). Kaggle Master, research assistant at Sabuj Lab (BRAC University) and research intern at ELITE Research Lab.</p>
+        <p class="links"><a href="mailto:swandip.singha@gmail.com">Email</a><a href="#" data-link="scholar">Google Scholar</a><a href="#" data-link="github">GitHub</a><a href="#" data-link="linkedin">LinkedIn</a><a href="#" data-link="kaggle">Kaggle</a></p></div>
+      </article>
+      <div class="grid collab">
+        <article class="card glass"><div class="avatar sm">AC</div><h3>Aditta Chowdhury</h3><p class="role">Assistant Professor, CUET</p><p>Undergraduate research supervisor.</p></article>
+        <article class="card glass"><div class="avatar sm">SR</div><h3>Saifur Rahman Sabuj</h3><p class="role">Sabuj Lab, BRAC University</p><p>Supervisor, MoWaveQFormer.</p></article>
+        <article class="card glass"><div class="avatar sm">KM</div><h3>Md. Kishor Morol</h3><p class="role">ELITE Research Lab</p><p>Supervisor, ECG denoising review.</p></article>
+        <article class="card glass open"><div class="avatar sm">+</div><h3>Your name here</h3><p class="role">Open positions</p><p><a href="#join">See how to join</a></p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <h2>Publications</h2>
+    <p class="sub">Journal articles, conference papers, preprints and work under review.</p>
+    <div class="chips" role="tablist" aria-label="Filter publications">
+      <button class="chip on" data-f="all">All</button><button class="chip" data-f="J">Journal</button><button class="chip" data-f="C">Conference</button><button class="chip" data-f="P">Preprint</button><button class="chip" data-f="U">Under review</button>
+    </div>
+    <ol class="pubs" id="pubs"></ol>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <h2>Projects</h2>
+    <p class="sub">Select a project to see what it does and how well it works.</p>
+    <div class="grid three" id="projects-grid"></div>
+  </div>
+</section>
+
+<section id="join">
+  <div class="wrap split">
+    <div>
+      <h2>Join us</h2>
+      <p class="sub">We welcome undergraduates and early researchers who like signals, code and careful experiments.</p>
+      <ul class="roles">
+        <li class="glass"><h3>Research assistant</h3><p>Reproduce baselines, run ablations, write up results.</p></li>
+        <li class="glass"><h3>Dataset &amp; tools contributor</h3><p>Clean public PPG/ECG datasets and build evaluation scripts.</p></li>
+        <li class="glass"><h3>Thesis collaborator</h3><p>Co-develop a focused project toward a paper.</p></li>
+      </ul>
+    </div>
+    <form class="glass form" id="join-form" data-kind="join" novalidate>
+      <h3>Apply</h3>
+      <label>Full name<input name="name" required autocomplete="name"></label>
+      <label>Email<input name="email" type="email" required autocomplete="email"></label>
+      <label>University and year<input name="affiliation" required></label>
+      <label>Role<select name="role"><option>Research assistant</option><option>Dataset &amp; tools contributor</option><option>Thesis collaborator</option></select></label>
+      <label>Why this lab? Share a link to your CV or code.<textarea name="message" rows="4" required></textarea></label>
+      <button class="btn primary" type="submit">Send application</button>
+      <p class="status" role="status"></p>
+    </form>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap about">
+    <div>
+      <h2>About</h2>
+      <p class="sub">A codec compresses a signal and restores it. We do the same for the body’s signals: keep the information, drop the noise.</p>
+      <p>BioCodec Lab grew out of undergraduate research at Chittagong University of Engineering and Technology on PPG and ECG denoising, signal quality and non-invasive diabetes screening. Today it connects collaborators at CUET, BRAC University and ELITE Research Lab.</p>
+      <p>We publish code and results openly where we can, report on real noise rather than only synthetic noise, and test whether cleaner signals change downstream clinical decisions.</p>
+    </div>
+    <img class="glass" src="assets/banner.png" alt="BioCodec Lab logo: Deep Learning for Physiological Signals" loading="lazy">
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap split">
+    <div>
+      <h2>Contact</h2>
+      <p class="sub">Questions, collaborations or press: write to us.</p>
+      <p class="mail"><a href="mailto:swandip.singha@gmail.com">swandip.singha@gmail.com</a></p>
+      <p>Chattogram, Bangladesh<br>Department of Electrical and Electronic Engineering, CUET</p>
+    </div>
+    <form class="glass form" id="contact-form" data-kind="contact" novalidate>
+      <h3>Send a message</h3>
+      <label>Name<input name="name" required autocomplete="name"></label>
+      <label>Email<input name="email" type="email" required autocomplete="email"></label>
+      <label>Message<textarea name="message" rows="5" required></textarea></label>
+      <button class="btn primary" type="submit">Send message</button>
+      <p class="status" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>© <span id="yr"></span> BioCodec Lab · CUET, Bangladesh</span><a href="#home">Back to top</a></div></footer>
+<script src="script.js"></script>
+</body>
+</html>
