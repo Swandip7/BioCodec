@@ -46,3 +46,33 @@
   .pipe-step{font-size:11px;padding:4px 8px}
   .pipe-step .pipe-dot{width:6px;height:6px}
 }
+/* waveform wrapper + overlay metrics */
+.wave-wrap{
+  position:relative;
+  margin:10px 0 4px;
+}
+.wave-wrap canvas{display:block;width:100%;height:240px}
+
+.metrics-overlay{
+  position:absolute;top:12px;left:14px;
+  display:grid;gap:4px;
+  font:500 12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  color:var(--ink2);
+  background:rgba(255,255,255,.55);
+  border:1px solid rgba(15,47,79,.08);
+  border-radius:12px;
+  padding:10px 14px;
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  pointer-events:none;
+  min-width:130px;
+}
+.m-row{display:flex;justify-content:space-between;gap:16px}
+.m-key{color:rgba(15,47,79,.5);font-weight:700;letter-spacing:.04em}
+.m-val{color:var(--ink)}
+.m-val b{font-weight:700;color:var(--blue);font-variant-numeric:tabular-nums}
+
+@media(max-width:600px){
+  .metrics-overlay{font-size:11px;padding:8px 10px;min-width:110px}
+  .wave-wrap canvas{height:200px}
+}
