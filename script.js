@@ -42,7 +42,7 @@ if (burger && links) {
 /* ========= SOCIAL LINKS ========= */
 $$("[data-link]").forEach(a => { const u = SOCIAL[a.dataset.link]; if (u) { a.href = u; a.target = "_blank"; a.rel = "noopener"; } else a.remove(); });
 
-/* ========= PUBLICATIONS (only on publications.html) ========= */
+/* ========= PUBLICATIONS ========= */
 const pubs = $("#pubs");
 if (pubs) {
   const renderPubs = (f = "all") => {
@@ -58,7 +58,7 @@ if (pubs) {
 const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); } }), { threshold: .12 });
 $$("section:not(.hero) h2, section:not(.hero) .sub, .grid, .people, .pubs, .roles, .form, .about > *, .stats").forEach(el => { el.classList.add("rv"); rv.observe(el); });
 
-/* ========= SIGNAL SCOPE (only on home) ========= */
+/* ========= SIGNAL SCOPE ========= */
 const cv = $("#wave");
 if (cv) {
   const ctx = cv.getContext("2d");
@@ -104,26 +104,19 @@ if (cv) {
   };
   requestAnimationFrame(frame);
 
-  /* live metric updates — realistic model of denoising behaviour */
   setInterval(() => {
     const n = noiseIn.value / 100, on = codecIn.checked;
 
-    // Heart rate error grows sharply with noise (motion corrupts peak detection)
     const hrErr = on ? n * 2.2 : n * 32;
     if (hrEl) hrEl.textContent = Math.round(BPM + (Math.random() - .5) * 2 * hrErr);
 
-    // Signal quality tiers
     const q = n < .25 ? "High" : n < .55 ? "Medium" : n < .8 ? "Low" : "Poor";
     if (sqEl) sqEl.textContent = (on && n > .85) ? "Low·gated" : q;
 
-    // SNR: raw input collapses to ~6 dB at max noise; codec recovers ~18 dB
     const rawSnr = 32 - n * 26;
     const denoisedSnr = rawSnr + (on ? n * 18 : 0);
     if (snrEl) snrEl.textContent = Math.max(2, denoisedSnr).toFixed(1) + " dB";
 
-    // Correlation with clean reference:
-    // codec ON degrades gracefully (0.999 → 0.94)
-    // codec OFF falls off fast (0.99 → 0.35)
     const rOn  = 0.999 - n * 0.06;
     const rOff = 0.99 - Math.pow(n, 0.7) * 0.64;
     const rVal = on ? rOn : rOff;
@@ -131,7 +124,7 @@ if (cv) {
   }, 600);
 }
 
-/* ========= FORMS (join + contact pages) ========= */
+/* ========= FORMS ========= */
 $$(".form").forEach(form => form.addEventListener("submit", async e => {
   e.preventDefault();
   const st = $(".status", form), cfg = FORMS[form.dataset.kind], btn = $("button", form);
