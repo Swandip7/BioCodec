@@ -161,3 +161,7 @@ main.page > section:first-child{padding-top:150px}
   *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none}
 }
+.about-text{max-width:70ch}
+.about-text p{margin:0 0 18px;color:var(--ink2);font-size:17px;line-height:1.7}
+.about-text .sub{font-size:19px;color:var(--ink2);margin:14px 0 26px}
+.about-text p:last-child{margin-bottom:0}
