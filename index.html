@@ -51,14 +51,13 @@
         <label class="ctl sw"><input id="codec" type="checkbox" checked> Codec on</label>
       </div>
 
-      <div class="wave-wrap">
-        <canvas id="wave" height="240" aria-label="Animated PPG waveform before and after denoising" role="img"></canvas>
-        <div class="metrics-overlay" aria-hidden="true">
-          <div class="m-row"><span class="m-key">HR</span><span class="m-val"><b id="hr">72</b> bpm</span></div>
-          <div class="m-row"><span class="m-key">SQ</span><span class="m-val"><b id="sq">—</b></span></div>
-          <div class="m-row"><span class="m-key">SNR</span><span class="m-val"><b id="snr">—</b></span></div>
-          <div class="m-row"><span class="m-key">r</span><span class="m-val"><b id="corr">—</b></span></div>
-        </div>
+      <canvas id="wave" height="240" aria-label="Animated PPG waveform before and after denoising" role="img"></canvas>
+
+      <div class="scope-foot">
+        <span>Heart rate <b id="hr">72</b> bpm</span>
+        <span>Signal quality <b id="sq">—</b></span>
+        <span>SNR <b id="snr">—</b></span>
+        <span>Correlation <b id="corr">—</b></span>
       </div>
     </div>
   </div>
