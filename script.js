@@ -77,11 +77,16 @@ if (pg) {
 const rv = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rv.unobserve(e.target); } }), { threshold: .12 });
 $$("section:not(.hero) h2, section:not(.hero) .sub, .grid, .people, .pubs, .roles, .form, .about > *, .stats").forEach(el => { el.classList.add("rv"); rv.observe(el); });
 
-/* ========= SIGNAL SCOPE (only on home) ========= */
+/* ========= SIGNAL SCOPE + PIPELINE (only on home) ========= */
 const cv = $("#wave");
 if (cv) {
   const ctx = cv.getContext("2d");
-  const noiseIn = $("#noise"), codecIn = $("#codec"), hrEl = $("#hr"), sqEl = $("#sq");
+  const noiseIn = $("#noise"), codecIn = $("#codec");
+  const hrEl = $("#hr"), sqEl = $("#sq"), snrEl = $("#snr"), hrvEl = $("#hrv");
+  const pipeSteps = $$("#pipeline .pipe-step");
+  const pipeArrows = $$("#pipeline .pipe-arrow");
+  let pipeTick = 0;
+
   let W, H, DPR;
   const size = () => { DPR = Math.min(devicePixelRatio || 1, 2); W = cv.clientWidth; H = cv.clientHeight; cv.width = W * DPR; cv.height = H * DPR; ctx.setTransform(DPR, 0, 0, DPR, 0, 0); };
   size(); addEventListener("resize", size);
@@ -123,10 +128,48 @@ if (cv) {
 
   setInterval(() => {
     const n = noiseIn.value / 100, on = codecIn.checked;
+
+    // heart rate
     const err = on ? n * 1.5 : n * 22;
     hrEl.textContent = Math.round(BPM + (Math.random() - .5) * 2 * err);
+
+    // signal quality
     const q = n < .35 ? "High" : n < .7 ? "Medium" : "Low";
     sqEl.textContent = on && n > .85 ? "Low · segment gated" : q;
+
+    // SNR (dB)
+    const cleanSnr = 32 - n * 22;
+    const denoisedSnr = cleanSnr + (on ? n * 14 : 0);
+    if (snrEl) snrEl.textContent = Math.max(2, denoisedSnr).toFixed(1) + " dB";
+
+    // HRV (RMSSD in ms)
+    const hrvVal = 42 + (on ? n * 1.5 : n * -14);
+    if (hrvEl) hrvEl.textContent = Math.round(hrvVal) + " ms";
+
+    // pipeline animation
+    pipeTick++;
+    if (pipeSteps.length) {
+      const active = on ? pipeTick % 3 : pipeTick % 2;
+
+      pipeSteps.forEach((s, i) => {
+        const step = i + 1;
+        s.classList.remove("lit", "dim");
+
+        if (step === 1) s.classList.add("lit");
+        else if (step === 2) on ? s.classList.add("lit") : s.classList.add("dim");
+        else if (step === 3) on ? s.classList.add("lit") : s.classList.add("dim");
+        else if (step === 4) (active === 0) ? s.classList.add("lit") : s.classList.add("dim");
+        else if (step === 5) (active === 1) ? s.classList.add("lit") : s.classList.add("dim");
+      });
+
+      pipeArrows.forEach((a, i) => {
+        a.classList.remove("lit");
+        if (i === 0) a.classList.add("lit");
+        else if (i === 1) { if (on) a.classList.add("lit"); }
+        else if (i === 2) { if (active === 0) a.classList.add("lit"); }
+        else if (i === 3) { if (active === 1) a.classList.add("lit"); }
+      });
+    }
   }, 600);
 }
 
