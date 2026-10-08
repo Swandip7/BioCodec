@@ -168,7 +168,7 @@ main.page > section:first-child{padding-top:150px}
 /* projects list — ongoing work */
 .proj-list{
   display:grid;
-  gap:16px;
+  gap:28px;
 }
 .proj-card{
   padding:30px 34px;
