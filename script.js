@@ -123,25 +123,22 @@ if (cv) {
   };
   requestAnimationFrame(frame);
 
+  /* live metric updates — guarded so a missing element never crashes the loop */
   setInterval(() => {
     const n = noiseIn.value / 100, on = codecIn.checked;
 
-    // Heart rate: error grows with noise
     const err = on ? n * 1.5 : n * 22;
-    hrEl.textContent = Math.round(BPM + (Math.random() - .5) * 2 * err);
+    if (hrEl) hrEl.textContent = Math.round(BPM + (Math.random() - .5) * 2 * err);
 
-    // Signal quality
     const q = n < .35 ? "High" : n < .7 ? "Medium" : "Low";
-    sqEl.textContent = on && n > .85 ? "Low·gated" : q;
+    if (sqEl) sqEl.textContent = on && n > .85 ? "Low·gated" : q;
 
-    // SNR (dB): input drops with noise, codec recovers it
     const cleanSnr = 32 - n * 22;
     const denoisedSnr = cleanSnr + (on ? n * 14 : 0);
-    snrEl.textContent = Math.max(2, denoisedSnr).toFixed(1) + " dB";
+    if (snrEl) snrEl.textContent = Math.max(2, denoisedSnr).toFixed(1) + " dB";
 
-    // Correlation with reference (r)
     const rVal = on ? (0.998 - n * 0.02) : (0.98 - n * 0.35);
-    corrEl.textContent = Math.max(0, rVal).toFixed(3);
+    if (corrEl) corrEl.textContent = Math.max(0, rVal).toFixed(3);
   }, 600);
 }
 
