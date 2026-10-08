@@ -25,7 +25,13 @@ section{padding:88px 0}
 /* nav */
 .nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 28px));z-index:50;display:flex;align-items:center;justify-content:space-between;padding:8px 14px 8px 18px;border-radius:999px}
 .brand{display:flex;align-items:center;text-decoration:none}
-.brand img{height:40px;width:auto;display:block;flex-shrink:0}
+.brand img {
+  height: 40px;
+  width: auto;
+  display: block;
+  flex-shrink: 0;
+  mix-blend-mode: multiply; /* This makes the white background disappear! */
+}
 #links{display:flex;gap:2px;align-items:center}
 #links a{padding:8px 13px;border-radius:999px;text-decoration:none;color:var(--ink2);font-weight:500;font-size:15px;transition:background .25s,color .25s}
 #links a:hover,#links a.active{background:rgba(23,184,162,.14);color:var(--ink)}
