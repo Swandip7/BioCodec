@@ -286,7 +286,25 @@ main.page > section:first-child{padding-top:150px}
    PEOPLE SECTION
    =========================== */
 
-.people-grid{
+.people-group{
+  margin-bottom:56px;
+}
+.people-group:last-child{
+  margin-bottom:0;
+}
+
+.people-heading{
+  font-size:14px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--blue);
+  margin:0 0 20px;
+  padding-bottom:12px;
+  border-bottom:1px solid rgba(15,47,79,.1);
+}
+
+.people-row{
   display:grid;
   grid-template-columns:repeat(3, 1fr);
   gap:22px;
@@ -332,15 +350,6 @@ main.page > section:first-child{padding-top:150px}
   line-height:1.2;
 }
 
-.person-role{
-  color:var(--teal) !important;
-  font-weight:700;
-  font-size:14.5px;
-  margin:0 !important;
-  letter-spacing:.01em;
-  line-height:1.4;
-}
-
 .person-bio{
   color:var(--ink2);
   font-size:15px;
@@ -350,7 +359,7 @@ main.page > section:first-child{padding-top:150px}
 
 .person-meta{
   color:var(--ink2) !important;
-  font-size:14px;
+  font-size:14.5px;
   line-height:1.55;
   margin:0 !important;
 }
@@ -363,7 +372,7 @@ main.page > section:first-child{padding-top:150px}
   background:rgba(42,111,176,.1);
   padding:4px 12px;
   border-radius:999px;
-  margin-top:6px;
+  margin-top:8px;
   letter-spacing:.01em;
 }
 
@@ -372,7 +381,7 @@ main.page > section:first-child{padding-top:150px}
   display:flex;
   gap:14px;
   flex-wrap:wrap;
-  margin:12px 0 0 !important;
+  margin:14px 0 0 !important;
 }
 .person-links a{
   color:var(--blue);
@@ -387,9 +396,8 @@ main.page > section:first-child{padding-top:150px}
   text-underline-offset:3px;
 }
 
-/* --- featured (Swandip) card --- */
+/* --- featured card (Swandip) --- */
 .person-card.featured{
-  grid-column:span 2;
   flex-direction:row;
 }
 .person-card.featured .person-photo{
@@ -401,16 +409,18 @@ main.page > section:first-child{padding-top:150px}
 .person-card.featured .person-info{
   flex:1;
   justify-content:center;
-  padding:30px 32px;
+  padding:34px 36px;
+}
+.person-card.featured h3{
+  font-size:26px;
 }
 
 /* --- responsive --- */
 @media(max-width:960px){
-  .people-grid{
+  .people-row{
     grid-template-columns:repeat(2, 1fr);
   }
   .person-card.featured{
-    grid-column:span 2;
     flex-direction:column;
   }
   .person-card.featured .person-photo{
@@ -424,11 +434,8 @@ main.page > section:first-child{padding-top:150px}
 }
 
 @media(max-width:600px){
-  .people-grid{
+  .people-row{
     grid-template-columns:1fr;
-  }
-  .person-card.featured{
-    grid-column:span 1;
   }
   .person-photo{
     aspect-ratio:4 / 3;
@@ -438,6 +445,9 @@ main.page > section:first-child{padding-top:150px}
   }
   .person-card h3{
     font-size:19px;
+  }
+  .person-card.featured h3{
+    font-size:22px;
   }
   .person-bio{
     font-size:14.5px;
