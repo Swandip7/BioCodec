@@ -241,7 +241,10 @@ main.page > section:first-child{padding-top:150px}
   color:var(--blue);
   margin:8px 0 16px;
 }
-/* contact info cards */
+/* contact page */
+.contact-wrap{
+  max-width:720px;
+}
 .contact-list{
   list-style:none;
   margin:0;
