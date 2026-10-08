@@ -206,3 +206,12 @@ main.page > section:first-child{padding-top:150px}
   .proj-card{padding:22px 22px}
   .proj-card h3{font-size:19px}
 }
+.pub-link{
+  display:inline-block;
+  font-weight:700;
+  color:var(--teal);
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+  transition:border-color .2s;
+}
+.pub-link:hover{border-bottom-color:var(--teal)}
