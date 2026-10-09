@@ -437,3 +437,10 @@ main.page > section:first-child{padding-top:150px}
 main h2{
   margin-bottom:28px;
 }
+/* less transparent navbar */
+.nav.glass{
+  background:rgba(255,255,255,.92);
+}
+@media(max-width:820px){
+  #links{background:rgba(255,255,255,.96)}
+}
