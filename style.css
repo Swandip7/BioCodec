@@ -163,7 +163,7 @@ main.page > section:first-child{padding-top:150px}
 }
 .about-text{max-width:70ch}
 .about-text p{margin:0 0 22px;color:var(--ink2);font-size:17px;line-height:1.7}
-.about-text .sub{font-size:19px;color:var(--ink2);margin:0 0 22px}
+.about-text .sub{font-size:19px;color:var(--ink2);margin:0 0 40px}
 .about-text p:last-child{margin-bottom:0}
 /* projects list — ongoing work */
 .proj-list{
@@ -428,6 +428,4 @@ main.page > section:first-child{padding-top:150px}
     margin-bottom:38px;
   }
 }
-main h2 {
-  margin-bottom: 50px;
-}
+
