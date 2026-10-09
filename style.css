@@ -428,3 +428,6 @@ main.page > section:first-child{padding-top:150px}
     margin-bottom:38px;
   }
 }
+main h2 {
+  margin-bottom: 24px;
+}
