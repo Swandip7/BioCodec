@@ -26,8 +26,8 @@ const PUBS = [
   { t: "C", title: "MIT-BIH ECG Arrhythmia Multi-Class Classification Using AdamW-Optimized Deep Ensembles with SMOTE-Based Sampling", authors: "S. Singha, A. Saha, et al.", venue: "IEEE QPAIN, 2026 · oral presentation", link: "https://ieeexplore.ieee.org/document/11545563" },
   { t: "P", title: "MoWaveQFormer: A Motion-Conditioned Quality-Gated Transformer for Smartphone-Based PPG Heart Rate Estimation", authors: "S. Singha, R. B. Reza, S. R. Sabuj", venue: "arXiv:2609.16248, 2026", link: "https://arxiv.org/abs/2609.16248" },
   { t: "U", title: "BAFF-ECG: SNR-Conditioned ECG Denoising via Dirichlet Filter Fusion and Residual Gating", authors: "S. Singha, A. Chowdhury", venue: "Under review at Measurement", link: "" },
-  { t: "U", title: "Non-Invasive Blood Glucose Estimation from Multi-Wavelength Photoplethysmography Using Adaptive Signal Quality Assessment and Statistical Feature Selection", authors: "S. Singha, A. Chowdhury", venue: "Under review at Health Information Science and Systems", link: "" },
-  { t: "U", title: "Lightweight Domain-Adaptive SNR Estimation for 5G NR Channels via Scenario-Embedded Transfer Learning", authors: "S. Singha, A. Chowdhury", venue: "Under review at Arabian Journal for Science and Engineering", link: "" }
+  { t: "U", title: "Photoplethysmography-based glucose estimation with feature selection", authors: "S. Singha, A. Chowdhury", venue: "Under review at PLOS One", link: "" },
+  { t: "U", title: "CEF: Classical Estimator Fusion for 5G NR SNR Estimation Under RF Impairments", authors: "S. Singha, A. Chowdhury", venue: "Under review at IEEE WIRELESS COMMUNICATIONS LETTERS", link: "" }
 ];
 const LABEL = { J: "Journal", C: "Conf.", P: "Preprint", U: "Review" };
 
